@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 3
   tags:
   - HandManager
+  - HandHold
   layers:
   - Default
   - TransparentFX
