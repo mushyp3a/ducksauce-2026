@@ -8,7 +8,7 @@ public class MainMenuButton: MonoBehaviour
 {
     public Animator transition;
 
-    public String nextScene;
+    public string nextScene;
 
     public void startGame()
     {
