@@ -153,6 +153,8 @@ MonoBehaviour:
   speed: 5
   lLock: 0
   rLock: 0
+  rDefault: 1
+  lDefault: 1
 --- !u!4 &32517511
 Transform:
   m_ObjectHideFlags: 0
@@ -636,6 +638,7 @@ MonoBehaviour:
   rDefault: {fileID: 1292019675}
   lDefault: {fileID: 621097449}
   targetVelocity: 0
+  forceStrength: 75
 --- !u!114 &287943438
 MonoBehaviour:
   m_ObjectHideFlags: 0

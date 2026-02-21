@@ -18,6 +18,7 @@ public class PlayerInput : MonoBehaviour
     bool left;
 
     public float targetVelocity;
+    public float forceStrength;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -122,6 +123,10 @@ public class PlayerInput : MonoBehaviour
             rb.linearVelocity = rb.linearVelocity.normalized * rb.linearVelocity.magnitude * 1.5f;
             handManager.moveHand(true, lDefault, true);
             handManager.moveHand(false, rDefault, true);
+        }
+        if (Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            rb.AddForceY(forceStrength, ForceMode2D.Impulse);
         }
     }
 }
