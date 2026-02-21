@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEditorInternal;
 using UnityEngine;
@@ -7,12 +8,14 @@ public class MainMenuButton: MonoBehaviour
 {
     public Animator transition;
 
+    public String nextScene;
+
     public void startGame()
     {
-        StartCoroutine(LoadNextLevel(1));
+        StartCoroutine(LoadNextLevel());
     }
 
-    IEnumerator LoadNextLevel(int idx)
+    IEnumerator LoadNextLevel()
     {
         transition.SetTrigger("start");
 
@@ -21,6 +24,6 @@ public class MainMenuButton: MonoBehaviour
         yield return new WaitForSeconds(1);
 
 
-        SceneManager.LoadScene(idx);
+        SceneManager.LoadScene(nextScene);
     }
 }
