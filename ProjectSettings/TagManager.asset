@@ -6,6 +6,8 @@ TagManager:
   tags:
   - HandManager
   - HandHold
+  - rHand
+  - lHand
   layers:
   - Default
   - TransparentFX

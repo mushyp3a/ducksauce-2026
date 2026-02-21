@@ -5,35 +5,52 @@ public class HandMovementHandler : MonoBehaviour
     public GameObject leftHand;
     public GameObject rightHand;
     public int speed;
-    Transform target;
+    Transform rTarget;
+    Transform lTarget;
     bool left = true;
     bool move = false;
 
-    public void FixedUpdate()
+    public bool lLock = false;
+    public bool rLock = false;
+
+    public void Update()
     {
-        if (left)
+        if (lLock) {
+            leftHand.transform.position = lTarget.position;
+        } else if (Vector2.Distance(lTarget.position, leftHand.transform.position) < 0.1) {
+            lLock = true;
+            leftHand.transform.position = lTarget.position;
+        } else if (!lLock)
         {
-            leftHand.transform.position = Vector3.MoveTowards(leftHand.transform.position, target.position, speed * Time.deltaTime);
-            if (leftHand.transform.position == target.position)
-            {
-                move = false;
-            }
+            leftHand.transform.position = Vector2.MoveTowards(leftHand.transform.position, lTarget.position, Time.deltaTime * 10);
         }
-        else
+
+
+        if (rLock) {
+            rightHand.transform.position = rTarget.position;
+        }
+        else if (Vector2.Distance(rTarget.position, rightHand.transform.position) < 0.1) {
+            rLock = true;
+            rightHand.transform.position = rTarget.position;
+        } else if (!rLock)
         {
-            rightHand.transform.position = Vector3.MoveTowards(rightHand.transform.position, target.position, speed * Time.deltaTime);
-            if (rightHand.transform.position == target.position)
-            {
-                move = false;
-            }
+            rightHand.transform.position = Vector2.MoveTowards(rightHand.transform.position, rTarget.position, Time.deltaTime * 10);
         }
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public void moveHand(bool left, Transform target)
     {
-        this.left = left;
-        this.target = target;
+        if (left)
+        {
+            lLock = false;
+            lTarget = target;
+        }
+        else
+        {
+            rLock = false;
+            rTarget = target;
+        }
         move = true;
     }
 }
