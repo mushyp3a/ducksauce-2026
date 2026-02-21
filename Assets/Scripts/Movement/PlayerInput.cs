@@ -124,7 +124,7 @@ public class PlayerInput : MonoBehaviour
             handManager.moveHand(true, lDefault, true);
             handManager.moveHand(false, rDefault, true);
         }
-        if (Input.GetKeyDown(KeyCode.LeftShift))
+        if (Input.GetKeyDown(KeyCode.LeftShift) && (!rDefault || !lDefault))
         {
             rb.AddForceY(forceStrength, ForceMode2D.Impulse);
         }
