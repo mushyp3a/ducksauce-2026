@@ -76,8 +76,8 @@ public class PlayerInput : MonoBehaviour
             {
                 left = false;
                 targetVelocity = rb.linearVelocity.magnitude;
-                handManager.moveHand(false, rHand.pos);
-                handManager.moveHand(true, lDefault);
+                handManager.moveHand(false, rHand.pos, false);
+                handManager.moveHand(true, lDefault, true);
                 Destroy(gameObject.GetComponent<DistanceJoint2D>());
 
                 joint = gameObject.AddComponent<DistanceJoint2D>();
@@ -97,8 +97,8 @@ public class PlayerInput : MonoBehaviour
             {
                 left = true;
                 targetVelocity = rb.linearVelocity.magnitude;
-                handManager.moveHand(true, lHand.pos);
-                handManager.moveHand(false, rDefault);
+                handManager.moveHand(true, lHand.pos, false);
+                handManager.moveHand(false, rDefault, true);
                 Destroy(gameObject.GetComponent<DistanceJoint2D>());
 
                 joint = gameObject.AddComponent<DistanceJoint2D>();
@@ -120,8 +120,8 @@ public class PlayerInput : MonoBehaviour
             Destroy(gameObject.GetComponent<DistanceJoint2D>());
             holding = false;
             rb.linearVelocity = rb.linearVelocity.normalized * rb.linearVelocity.magnitude * 1.5f;
-            handManager.moveHand(true, lDefault);
-            handManager.moveHand(false, rDefault);
+            handManager.moveHand(true, lDefault, true);
+            handManager.moveHand(false, rDefault, true);
         }
     }
 }
