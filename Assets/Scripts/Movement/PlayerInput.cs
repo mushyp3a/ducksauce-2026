@@ -5,90 +5,123 @@ public class PlayerInput : MonoBehaviour
     HandMovementHandler handManager;
     public Transform[] positions;
     public float hangRadius;
+
+    HoldDetector rHand;
+    HoldDetector lHand;
+
+    public Transform rDefault;
+    public Transform lDefault;
+
     Rigidbody2D rb;
+    bool holding;
+
+    bool left;
+
+    public float targetVelocity;
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        left = false;
+        targetVelocity = 0;
+        holding = false;
         handManager = GameObject.FindGameObjectWithTag("HandManager").GetComponent<HandMovementHandler>();
         rb = GetComponent<Rigidbody2D>();
+        rHand = GameObject.FindGameObjectWithTag("rHand").GetComponent<HoldDetector>();
+        lHand = GameObject.FindGameObjectWithTag("lHand").GetComponent<HoldDetector>();
     }
 
     // Update is called once per frame
     void Update()
     {
         DistanceJoint2D joint = null;
-        if (Input.GetKeyDown(KeyCode.A))
+        if (Input.GetKey(KeyCode.Space))
         {
-            int pos = 0;
-            Destroy(gameObject.GetComponent<DistanceJoint2D>());
-            handManager.moveHand(true, positions[pos]);
+            if (holding)
+            {
+                targetVelocity = Mathf.Min(targetVelocity + Time.deltaTime, 8);
+                if (left)
+                {
+                    if (transform.position.y < lHand.pos.position.y && rb.linearVelocity.magnitude < targetVelocity)
+                    {
+                        rb.linearVelocity = rb.linearVelocity.normalized * targetVelocity;
+                    }
+                    else if (transform.position.y >= lHand.pos.position.y && rb.linearVelocityY > 0)
+                    {
+                        rb.linearVelocity *= 0.97f;
+                    }
+                    else
+                    {
+                        rb.gravityScale = 1;
+                    }
+                }
+                else
+                {
+                    if (transform.position.y < rHand.pos.position.y && rb.linearVelocity.magnitude < targetVelocity)
+                    {
+                        rb.linearVelocity = rb.linearVelocity.normalized * targetVelocity;
+                    }
+                    else if (transform.position.y >= rHand.pos.position.y && rb.linearVelocityY > 0)
+                    {
+                        rb.linearVelocity *= 0.97f;
+                    }
+                    else
+                    {
+                        rb.gravityScale = 1;
+                    }
+                }
+            }
+            if (rHand.nearHold && !holding)
+            {
+                left = false;
+                targetVelocity = rb.linearVelocity.magnitude;
+                handManager.moveHand(false, rHand.pos);
+                handManager.moveHand(true, lDefault);
+                Destroy(gameObject.GetComponent<DistanceJoint2D>());
 
-            joint = gameObject.AddComponent<DistanceJoint2D>();
+                joint = gameObject.AddComponent<DistanceJoint2D>();
 
-            joint.autoConfigureDistance = false;
-            joint.autoConfigureConnectedAnchor = false;
+                joint.autoConfigureDistance = false;
+                joint.autoConfigureConnectedAnchor = false;
 
-            Rigidbody2D holdRb = positions[pos].GetComponent<Rigidbody2D>();
+                Rigidbody2D holdRb = rHand.pos.GetComponent<Rigidbody2D>();
 
-            joint.connectedBody = positions[pos].GetComponent<Rigidbody2D>();
-            joint.distance = hangRadius;
+                joint.connectedBody = holdRb;
+                joint.distance = hangRadius;
 
-            joint.enableCollision = false;
+                joint.enableCollision = false;
+                holding = true;
+            }
+            else if (lHand.nearHold && !holding)
+            {
+                left = true;
+                targetVelocity = rb.linearVelocity.magnitude;
+                handManager.moveHand(true, lHand.pos);
+                handManager.moveHand(false, rDefault);
+                Destroy(gameObject.GetComponent<DistanceJoint2D>());
+
+                joint = gameObject.AddComponent<DistanceJoint2D>();
+
+                joint.autoConfigureDistance = false;
+                joint.autoConfigureConnectedAnchor = false;
+
+                Rigidbody2D holdRb = lHand.pos.GetComponent<Rigidbody2D>();
+
+                joint.connectedBody = holdRb;
+                joint.distance = hangRadius;
+
+                joint.enableCollision = false;
+                holding = true;
+            }
         }
-        if (Input.GetKeyDown(KeyCode.S))
+        if (Input.GetKeyUp(KeyCode.Space))
         {
-            int pos = 1;
             Destroy(gameObject.GetComponent<DistanceJoint2D>());
-            handManager.moveHand(true, positions[pos]);
-
-            joint = gameObject.AddComponent<DistanceJoint2D>();
-
-            joint.autoConfigureDistance = false;
-            joint.autoConfigureConnectedAnchor = false;
-
-            Rigidbody2D holdRb = positions[pos].GetComponent<Rigidbody2D>();
-
-            joint.connectedBody = positions[pos].GetComponent<Rigidbody2D>();
-            joint.distance = hangRadius;
-
-            joint.enableCollision = false;
-        }
-        if (Input.GetKeyDown(KeyCode.K))
-        {
-            int pos = 2;
-            Destroy(gameObject.GetComponent<DistanceJoint2D>());
-            handManager.moveHand(false, positions[pos]);
-
-            joint = gameObject.AddComponent<DistanceJoint2D>();
-
-            joint.autoConfigureDistance = false;
-            joint.autoConfigureConnectedAnchor = false;
-
-            Rigidbody2D holdRb = positions[pos].GetComponent<Rigidbody2D>();
-
-            joint.connectedBody = positions[pos].GetComponent<Rigidbody2D>();
-            joint.distance = hangRadius;
-
-            joint.enableCollision = false;
-        }
-        if (Input.GetKeyDown(KeyCode.L))
-        {
-            int pos = 3;
-            Destroy(gameObject.GetComponent<DistanceJoint2D>());
-            handManager.moveHand(false, positions[pos]);
-
-            joint = gameObject.AddComponent<DistanceJoint2D>();
-
-            joint.autoConfigureDistance = false;
-            joint.autoConfigureConnectedAnchor = false;
-
-            Rigidbody2D holdRb = positions[pos].GetComponent<Rigidbody2D>();
-
-            joint.connectedBody = positions[pos].GetComponent<Rigidbody2D>();
-            joint.distance = hangRadius;
-
-            joint.enableCollision = false;
+            holding = false;
+            rb.linearVelocity = rb.linearVelocity.normalized * rb.linearVelocity.magnitude * 1.5f;
+            handManager.moveHand(true, lDefault);
+            handManager.moveHand(false, rDefault);
         }
     }
 }
