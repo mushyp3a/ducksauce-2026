@@ -13,6 +13,9 @@ public class HandMovementHandler : MonoBehaviour
     public bool lLock = false;
     public bool rLock = false;
 
+    public bool rDefault = true;
+    public bool lDefault = true;
+
     public void Update()
     {
         if (lLock) {
@@ -39,16 +42,18 @@ public class HandMovementHandler : MonoBehaviour
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    public void moveHand(bool left, Transform target)
+    public void moveHand(bool left, Transform target, bool defaultPos)
     {
         if (left)
         {
             lLock = false;
+            lDefault = defaultPos;
             lTarget = target;
         }
         else
         {
             rLock = false;
+            rDefault = defaultPos;
             rTarget = target;
         }
         move = true;
