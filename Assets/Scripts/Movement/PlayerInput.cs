@@ -27,6 +27,8 @@ public class PlayerInput : MonoBehaviour
 
     private HoldDetector currentHand;
 
+    public CameraShake cameraShake;
+
     public bool LockToPoint = false;
 
     public bool locked;
@@ -36,6 +38,11 @@ public class PlayerInput : MonoBehaviour
         if (grabClip)
         {
             AudioSource.PlayClipAtPoint(grabClip, transform.position, 1);
+        }
+
+        if (cameraShake)
+        {
+            cameraShake.Shake();
         }
     }
     
