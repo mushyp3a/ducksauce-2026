@@ -7,6 +7,9 @@ public class HoldDetector : MonoBehaviour
 {
     public bool nearHold;
     public Transform pos;
+
+    public HoldScript holdScript;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -22,7 +25,11 @@ public class HoldDetector : MonoBehaviour
         if (hit != null && hit.CompareTag("HandHold"))
         {
             nearHold = true;
-            pos = Physics2D.OverlapCircle(transform.position, 0.7f).gameObject.transform;
+
+            GameObject obj = Physics2D.OverlapCircle(transform.position, 0.7f).gameObject;
+
+            pos = obj.transform;
+            holdScript = obj.GetComponent<HoldScript>();
         }
         else
         {

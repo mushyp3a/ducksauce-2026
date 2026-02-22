@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class PlayerInput : MonoBehaviour
@@ -20,6 +21,35 @@ public class PlayerInput : MonoBehaviour
     public float targetVelocity;
     public float forceStrength;
 
+    public AudioClip grabClip;
+    public AudioClip pullClip;
+    public AudioClip releaseClip;
+
+    private HoldDetector currentHand;
+
+    void PlayGrap()
+    {
+        if (grabClip)
+        {
+            AudioSource.PlayClipAtPoint(grabClip, transform.position, 1);
+        }
+    }
+    
+    void PlayPull()
+    {
+        if (pullClip)
+        {
+            AudioSource.PlayClipAtPoint(pullClip, transform.position, 1);
+        }
+    }
+
+    void PLayRelease()
+    { 
+        if (releaseClip)
+        {
+            AudioSource.PlayClipAtPoint(releaseClip, transform.position, 1);
+        }
+    }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -75,6 +105,8 @@ public class PlayerInput : MonoBehaviour
             }
             if (rHand.nearHold && !holding)
             {
+                PlayGrap();
+
                 left = false;
                 targetVelocity = rb.linearVelocity.magnitude;
                 handManager.moveHand(false, rHand.pos, false);
@@ -93,9 +125,13 @@ public class PlayerInput : MonoBehaviour
 
                 joint.enableCollision = false;
                 holding = true;
+
+                currentHand = rHand;
             }
             else if (lHand.nearHold && !holding)
             {
+                PlayGrap();
+
                 left = true;
                 targetVelocity = rb.linearVelocity.magnitude;
                 handManager.moveHand(true, lHand.pos, false);
@@ -114,18 +150,27 @@ public class PlayerInput : MonoBehaviour
 
                 joint.enableCollision = false;
                 holding = true;
+
+                currentHand = lHand;
             }
         }
-        if (Input.GetKeyUp(KeyCode.Space))
+        if (Input.GetKeyUp(KeyCode.Space) && holding)
         {
+            PLayRelease();
+
             Destroy(gameObject.GetComponent<DistanceJoint2D>());
             holding = false;
-            rb.linearVelocity = rb.linearVelocity.normalized * rb.linearVelocity.magnitude * 1.5f;
+            Debug.Log(currentHand.holdScript.getMult());
+            rb.linearVelocity = rb.linearVelocity.normalized * rb.linearVelocity.magnitude * 1.5f * currentHand.holdScript.getMult();
             handManager.moveHand(true, lDefault, true);
             handManager.moveHand(false, rDefault, true);
+
+            currentHand = null;
         }
         if (Input.GetKeyDown(KeyCode.LeftShift) && (!rDefault || !lDefault))
         {
+            PlayPull();
+
             rb.AddForceY(forceStrength, ForceMode2D.Impulse);
         }
     }
