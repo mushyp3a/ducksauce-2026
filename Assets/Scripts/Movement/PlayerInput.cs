@@ -47,7 +47,7 @@ public class PlayerInput : MonoBehaviour
         {
             if (holding)
             {
-                targetVelocity = Mathf.Min(targetVelocity + Time.deltaTime, 8);
+                targetVelocity = Mathf.Min(targetVelocity + (3 * Time.deltaTime), 8);
                 if (left)
                 {
                     if (transform.position.y < lHand.pos.position.y && rb.linearVelocity.magnitude < targetVelocity)
@@ -126,7 +126,7 @@ public class PlayerInput : MonoBehaviour
         {
             Destroy(gameObject.GetComponent<DistanceJoint2D>());
             holding = false;
-            rb.linearVelocity = rb.linearVelocity.normalized * rb.linearVelocity.magnitude * 6f;
+            rb.linearVelocity = rb.linearVelocity.normalized * rb.linearVelocity.magnitude * 8f;
             handManager.moveHand(true, lDefault, true);
             handManager.moveHand(false, rDefault, true);
         }
