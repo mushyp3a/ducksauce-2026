@@ -1709,10 +1709,12 @@ MonoBehaviour:
   rDefault: {fileID: 1292019675}
   lDefault: {fileID: 621097449}
   targetVelocity: 0
-  forceStrength: 40
+  forceStrength: 75
   grabClip: {fileID: 0}
   pullClip: {fileID: 0}
   releaseClip: {fileID: 0}
+  LockToPoint: 0
+  locked: 0
 --- !u!114 &287943438
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1728,6 +1730,9 @@ MonoBehaviour:
   handHold:
     serializedVersion: 2
     m_Bits: 4294967295
+  rDefault: {fileID: 1292019675}
+  lDefault: {fileID: 621097449}
+  leftChoose: {fileID: 0}
 --- !u!61 &287943439
 BoxCollider2D:
   m_ObjectHideFlags: 0
