@@ -36,6 +36,12 @@ public class PlayerInput : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        float halfW = Camera.main.orthographicSize * Camera.main.aspect;
+        if (transform.position.x > halfW)
+            transform.position = new Vector3(-halfW, transform.position.y, transform.position.z);
+        else if (transform.position.x < -halfW)
+            transform.position = new Vector3(halfW, transform.position.y, transform.position.z);
+
         DistanceJoint2D joint = null;
         if (Input.GetKey(KeyCode.Space))
         {
@@ -116,16 +122,17 @@ public class PlayerInput : MonoBehaviour
                 holding = true;
             }
         }
-        if (Input.GetKeyUp(KeyCode.Space))
+        if (Input.GetKeyUp(KeyCode.Space) && holding)
         {
             Destroy(gameObject.GetComponent<DistanceJoint2D>());
             holding = false;
-            rb.linearVelocity = rb.linearVelocity.normalized * rb.linearVelocity.magnitude * 1.5f;
+            rb.linearVelocity = rb.linearVelocity.normalized * rb.linearVelocity.magnitude * 6f;
             handManager.moveHand(true, lDefault, true);
             handManager.moveHand(false, rDefault, true);
         }
-        if (Input.GetKeyDown(KeyCode.LeftShift) && (!rDefault || !lDefault))
+        if (Input.GetKeyDown(KeyCode.LeftShift) && holding)
         {
+            Destroy(gameObject.GetComponent<DistanceJoint2D>());
             rb.AddForceY(forceStrength, ForceMode2D.Impulse);
         }
     }
