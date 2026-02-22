@@ -2,7 +2,8 @@ using UnityEngine;
 
 public class Win : MonoBehaviour
 {
-    ClimbCameraController cam;
+    public ClimbCameraController cam;
+    public GameTimer timer;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -19,7 +20,8 @@ public class Win : MonoBehaviour
     {
         if (col.gameObject.tag.Equals("Player"))
         {
-            cam.win = true;
+            timer.StopTimer();
+            GameObject.FindGameObjectWithTag("Player").GetComponent<explode>().explodeGuy();
         }
     }
 }
