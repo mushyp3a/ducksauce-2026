@@ -24,7 +24,7 @@ public class HandMovementHandler : MonoBehaviour
 
     public void Update()
     {
-        Transform lTargetNow = lTarget ?? lTargetDefault;
+        Transform lTargetNow = lTarget ? lTarget : lTargetDefault;
 
         if (lTargetNow)
         {
@@ -40,7 +40,7 @@ public class HandMovementHandler : MonoBehaviour
         }
         
 
-        Transform rTargetNow = rTarget ?? rTargetDefault;
+        Transform rTargetNow = rTarget ? rTarget : rTargetDefault;
 
         if (rTargetNow)
         {
