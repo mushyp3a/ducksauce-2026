@@ -643,6 +643,8 @@ MonoBehaviour:
   grabClip: {fileID: 8300000, guid: 91db93c759b77477887bed8be3da0402, type: 3}
   pullClip: {fileID: 8300000, guid: e08b654b16bb84fb49b65b6ebf899d84, type: 3}
   releaseClip: {fileID: 8300000, guid: 1cb69883cf354476f88775279a77f660, type: 3}
+  LockToPoint: 0
+  locked: 0
 --- !u!114 &287943438
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -658,6 +660,9 @@ MonoBehaviour:
   handHold:
     serializedVersion: 2
     m_Bits: 4294967295
+  rDefault: {fileID: 1292019675}
+  lDefault: {fileID: 621097449}
+  leftChoose: {fileID: 0}
 --- !u!1 &408693206
 GameObject:
   m_ObjectHideFlags: 0

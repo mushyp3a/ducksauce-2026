@@ -9,6 +9,9 @@ public class HandMovementHandler : MonoBehaviour
     Transform lTarget;
     bool left = true;
 
+    int rSpeed;
+    int lSpeed;
+
     public bool lLock = false;
     public bool rLock = false;
 
@@ -24,7 +27,7 @@ public class HandMovementHandler : MonoBehaviour
             leftHand.transform.position = lTarget.position;
         } else if (!lLock)
         {
-            leftHand.transform.position = Vector2.MoveTowards(leftHand.transform.position, lTarget.position, Time.deltaTime * 10);
+            leftHand.transform.position = Vector2.MoveTowards(leftHand.transform.position, lTarget.position, Time.deltaTime * lSpeed);
         }
 
 
@@ -36,24 +39,26 @@ public class HandMovementHandler : MonoBehaviour
             rightHand.transform.position = rTarget.position;
         } else if (!rLock)
         {
-            rightHand.transform.position = Vector2.MoveTowards(rightHand.transform.position, rTarget.position, Time.deltaTime * 10);
+            rightHand.transform.position = Vector2.MoveTowards(rightHand.transform.position, rTarget.position, Time.deltaTime * rSpeed);
         }
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    public void moveHand(bool left, Transform target, bool defaultPos, bool isJustReach = false)
+    public void moveHand(bool left, Transform target, bool defaultPos, int speed = 10)
     {
-        if (left && (!isJustReach || lDefault))
+        if (left)
         {
             lLock = false;
             lDefault = defaultPos;
             lTarget = target;
+            lSpeed = speed;
         }
-        else if (!isJustReach || rDefault)
+        else
         {
             rLock = false;
             rDefault = defaultPos;
             rTarget = target;
+            rSpeed = speed;
         }
     }
 }
