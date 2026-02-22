@@ -4453,6 +4453,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1764544828}
   - component: {fileID: 1764544827}
+  - component: {fileID: 1764544829}
   m_Layer: 0
   m_Name: Music
   m_TagString: Untagged
@@ -4572,6 +4573,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1764544829
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1764544826}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 183873c32dc8147e58bf00e07ba5bd8e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
 --- !u!4 &1767918021 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4775234198374345670, guid: 97ca75a729d534e678679ce202db331d, type: 3}
