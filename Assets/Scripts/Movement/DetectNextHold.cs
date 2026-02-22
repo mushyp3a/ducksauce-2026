@@ -32,8 +32,8 @@ public class DetectNextHold : MonoBehaviour
         nearPoints = nearCols.Select(col => col.gameObject).ToArray();
         nearPoints = nearPoints.Where(a => a.tag.Equals("HandHold")).ToArray();
 
-        nearLeft = nearPoints.Where(a => a.transform.position.x < 0).ToArray();
-        nearRight = nearPoints.Where(a => a.transform.position.x >= 0).ToArray();
+        nearLeft = nearPoints.Where(a => a.transform.position.x < 0 && a.transform.position.y >= transform.position.y).ToArray();
+        nearRight = nearPoints.Where(a => a.transform.position.x >= 0 && a.transform.position.y >= transform.position.y).ToArray();
 
         GameObject[] leftRankings = nearLeft.OrderByDescending(a => a.transform.position.y).ToArray();
         GameObject[] rightRankings = nearRight.OrderByDescending(a => a.transform.position.y).ToArray();
