@@ -12,6 +12,8 @@ public class MainMenuButton: MonoBehaviour
 
     public void startGame()
     {
+        Debug.Log("clicked");
+
         StartCoroutine(LoadNextLevel());
     }
 

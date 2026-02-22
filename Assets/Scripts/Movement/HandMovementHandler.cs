@@ -8,7 +8,6 @@ public class HandMovementHandler : MonoBehaviour
     Transform rTarget;
     Transform lTarget;
     bool left = true;
-    bool move = false;
 
     public bool lLock = false;
     public bool rLock = false;
@@ -42,20 +41,19 @@ public class HandMovementHandler : MonoBehaviour
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    public void moveHand(bool left, Transform target, bool defaultPos)
+    public void moveHand(bool left, Transform target, bool defaultPos, bool isJustReach = false)
     {
-        if (left)
+        if (left && (!isJustReach || lDefault))
         {
             lLock = false;
             lDefault = defaultPos;
             lTarget = target;
         }
-        else
+        else if (!isJustReach || rDefault)
         {
             rLock = false;
             rDefault = defaultPos;
             rTarget = target;
         }
-        move = true;
     }
 }

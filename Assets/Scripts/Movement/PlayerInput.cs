@@ -27,6 +27,10 @@ public class PlayerInput : MonoBehaviour
 
     private HoldDetector currentHand;
 
+    public bool LockToPoint = false;
+
+    public bool locked;
+
     void PlayGrap()
     {
         if (grabClip)
@@ -54,6 +58,7 @@ public class PlayerInput : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        locked = true;
         left = false;
         targetVelocity = 0;
         holding = false;
@@ -73,7 +78,7 @@ public class PlayerInput : MonoBehaviour
             transform.position = new Vector3(halfW, transform.position.y, transform.position.z);
 
         DistanceJoint2D joint = null;
-        if (Input.GetKey(KeyCode.Space))
+        if (Input.GetKey(KeyCode.Space) || locked)
         {
             if (holding)
             {
@@ -88,10 +93,6 @@ public class PlayerInput : MonoBehaviour
                     {
                         rb.linearVelocity *= 0.97f;
                     }
-                    else
-                    {
-                        rb.gravityScale = 1;
-                    }
                 }
                 else
                 {
@@ -102,10 +103,6 @@ public class PlayerInput : MonoBehaviour
                     else if (transform.position.y >= rHand.pos.position.y && rb.linearVelocityY > 0)
                     {
                         rb.linearVelocity *= 0.97f;
-                    }
-                    else
-                    {
-                        rb.gravityScale = 1;
                     }
                 }
             }
@@ -160,7 +157,7 @@ public class PlayerInput : MonoBehaviour
                 currentHand = lHand;
             }
         }
-        if (Input.GetKeyUp(KeyCode.Space) && holding)
+        if (Input.GetKeyUp(KeyCode.Space) && holding && !locked)
         {
             PLayRelease();
 
@@ -172,8 +169,10 @@ public class PlayerInput : MonoBehaviour
 
             currentHand = null;
         }
-        if (Input.GetKeyDown(KeyCode.LeftShift) && holding)
+        if (Input.GetKeyDown(KeyCode.LeftShift) && holding && !LockToPoint)
         {
+            locked = false;
+            holding = false;
             PlayPull();
 
             Destroy(gameObject.GetComponent<DistanceJoint2D>());

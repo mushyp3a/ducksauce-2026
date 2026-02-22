@@ -12,38 +12,61 @@ public class DetectNextHold : MonoBehaviour
     public LayerMask handHold;
 
     HandMovementHandler handler;
+
+    public Transform rDefault;
+    public Transform lDefault;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         handler = GameObject.FindGameObjectWithTag("HandManager").GetComponent<HandMovementHandler>();
     }
 
+    public Transform leftChoose;
+
     // Update is called once per frame
     void Update()
     {
         nearPoints = new GameObject[0];
-        nearCols = Physics2D.OverlapCircleAll(transform.position, 2f);
+        nearCols = Physics2D.OverlapCircleAll(transform.position, 5f);
         nearPoints = nearCols.Select(col => col.gameObject).ToArray();
         nearPoints = nearPoints.Where(a => a.tag.Equals("HandHold")).ToArray();
 
         nearLeft = nearPoints.Where(a => a.transform.position.x < 0).ToArray();
         nearRight = nearPoints.Where(a => a.transform.position.x >= 0).ToArray();
 
-        GameObject leftHighest = nearLeft.OrderByDescending(a => a.transform.position.y).Last();
-        GameObject rightHighest = nearRight.OrderByDescending(a => a.transform.position.y).Last();
-        GameObject max = leftHighest;
-        if (rightHighest.transform.position.y >= leftHighest.transform.position.y)
+        GameObject[] leftRankings = nearLeft.OrderByDescending(a => a.transform.position.y).ToArray();
+        GameObject[] rightRankings = nearRight.OrderByDescending(a => a.transform.position.y).ToArray();
+
+        foreach (var item in leftRankings)
         {
-            max = rightHighest;
+            Debug.Log(item.transform.position);
         }
+        
 
         if (handler.rDefault)
         {
-            handler.moveHand(false, rightHighest.transform, true);
+            if (rightRankings.Length > 0)
+            {
+            handler.moveHand(false, rightRankings.Last().transform, true);
+                
+            } else
+            {
+                handler.moveHand(false, rDefault, true);
+            }
         }
+
         if (handler.lDefault)
         {
-            handler.moveHand(true, leftHighest.transform, true);
-        }
+            
+            if (leftRankings.Length > 0)
+            {
+                leftChoose = leftRankings.Last().transform;
+                handler.moveHand(true, leftRankings.Last().transform, true);
+            } else
+            {
+                handler.moveHand(true, lDefault, true);
+            }
+        } 
     }
 }

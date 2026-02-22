@@ -25,7 +25,7 @@ public class HoldScript : MonoBehaviour
     {
         return type switch
         {
-            HoldType.Super => 10,
+            HoldType.Super => 5,
             _ => 1,
         };
     }
