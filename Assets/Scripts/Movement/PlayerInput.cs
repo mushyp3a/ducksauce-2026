@@ -66,12 +66,18 @@ public class PlayerInput : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        float halfW = Camera.main.orthographicSize * Camera.main.aspect;
+        if (transform.position.x > halfW)
+            transform.position = new Vector3(-halfW, transform.position.y, transform.position.z);
+        else if (transform.position.x < -halfW)
+            transform.position = new Vector3(halfW, transform.position.y, transform.position.z);
+
         DistanceJoint2D joint = null;
         if (Input.GetKey(KeyCode.Space))
         {
             if (holding)
             {
-                targetVelocity = Mathf.Min(targetVelocity + Time.deltaTime, 8);
+                targetVelocity = Mathf.Min(targetVelocity + (3 * Time.deltaTime), 8);
                 if (left)
                 {
                     if (transform.position.y < lHand.pos.position.y && rb.linearVelocity.magnitude < targetVelocity)
@@ -160,17 +166,17 @@ public class PlayerInput : MonoBehaviour
 
             Destroy(gameObject.GetComponent<DistanceJoint2D>());
             holding = false;
-            Debug.Log(currentHand.holdScript.getMult());
-            rb.linearVelocity = rb.linearVelocity.normalized * rb.linearVelocity.magnitude * 1.5f * currentHand.holdScript.getMult();
+            rb.linearVelocity = rb.linearVelocity.normalized * rb.linearVelocity.magnitude * 8f * currentHand.holdScript.getMult();
             handManager.moveHand(true, lDefault, true);
             handManager.moveHand(false, rDefault, true);
 
             currentHand = null;
         }
-        if (Input.GetKeyDown(KeyCode.LeftShift) && (!rDefault || !lDefault))
+        if (Input.GetKeyDown(KeyCode.LeftShift) && holding)
         {
             PlayPull();
 
+            Destroy(gameObject.GetComponent<DistanceJoint2D>());
             rb.AddForceY(forceStrength, ForceMode2D.Impulse);
         }
     }
