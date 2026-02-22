@@ -20,13 +20,13 @@ public class HoldDetector : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Collider2D hit = Physics2D.OverlapCircle(transform.position, 0.7f);
+        Collider2D hit = Physics2D.OverlapCircle(transform.position, 1f);
 
         if (hit != null && hit.CompareTag("HandHold"))
         {
             nearHold = true;
 
-            GameObject obj = Physics2D.OverlapCircle(transform.position, 0.7f).gameObject;
+            GameObject obj = Physics2D.OverlapCircle(transform.position, 1f).gameObject;
 
             pos = obj.transform;
             holdScript = obj.GetComponent<HoldScript>();

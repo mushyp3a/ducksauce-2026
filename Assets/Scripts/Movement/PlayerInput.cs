@@ -72,9 +72,9 @@ public class PlayerInput : MonoBehaviour
     void Update()
     {
         float halfW = Camera.main.orthographicSize * Camera.main.aspect;
-        if (transform.position.x > halfW)
+        if (transform.position.x > halfW+1)
             transform.position = new Vector3(-halfW, transform.position.y, transform.position.z);
-        else if (transform.position.x < -halfW)
+        else if (transform.position.x < -halfW-1)
             transform.position = new Vector3(halfW, transform.position.y, transform.position.z);
 
         DistanceJoint2D joint = null;

@@ -9,16 +9,22 @@ public enum HoldType
 
 public class HoldScript : MonoBehaviour
 {
-
+    public GameObject particle;
     public HoldType type;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start(){}
+    void Start()
+    {
+        particle = transform.GetChild(0).gameObject;
+    }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (type == HoldType.Super)
+        {
+            particle.SetActive(true);
+        }
     }
 
     public float getMult()
