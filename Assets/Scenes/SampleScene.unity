@@ -275,6 +275,10 @@ MonoBehaviour:
   leftHand: {fileID: 50232052}
   rightHand: {fileID: 2068441683}
   speed: 5
+  rTarget: {fileID: 0}
+  rTargetDefault: {fileID: 0}
+  lTarget: {fileID: 0}
+  lTargetDefault: {fileID: 0}
   lLock: 0
   rLock: 0
   rDefault: 1
@@ -3159,6 +3163,7 @@ GameObject:
   - component: {fileID: 519420029}
   - component: {fileID: 519420030}
   - component: {fileID: 519420033}
+  - component: {fileID: 519420034}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -3316,6 +3321,21 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
   CustomBlends: {fileID: 0}
+--- !u!114 &519420034
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 519420028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f73ed1f5689e4bdd4b994717e3b9f652, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CameraShake
+  defaultDuration: 0.2
+  defaultMagnitude: 0.15
+  dampingSpeed: 3
 --- !u!1 &524718673
 GameObject:
   m_ObjectHideFlags: 0
