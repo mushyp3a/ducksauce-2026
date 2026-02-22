@@ -38,11 +38,6 @@ public class DetectNextHold : MonoBehaviour
         GameObject[] leftRankings = nearLeft.OrderByDescending(a => a.transform.position.y).ToArray();
         GameObject[] rightRankings = nearRight.OrderByDescending(a => a.transform.position.y).ToArray();
 
-        foreach (var item in leftRankings)
-        {
-            Debug.Log(item.transform.position);
-        }
-        
 
         if (handler.rDefault)
         {
