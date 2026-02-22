@@ -71,6 +71,7 @@ public class PlayerInput : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // go off screen
         float halfW = Camera.main.orthographicSize * Camera.main.aspect;
         if (transform.position.x > halfW+1)
             transform.position = new Vector3(-halfW, transform.position.y, transform.position.z);
@@ -112,8 +113,8 @@ public class PlayerInput : MonoBehaviour
 
                 left = false;
                 targetVelocity = rb.linearVelocity.magnitude;
-                handManager.moveHand(false, rHand.pos, false);
-                handManager.moveHand(true, lDefault, true);
+                handManager.moveRight(rHand.pos);
+
                 Destroy(gameObject.GetComponent<DistanceJoint2D>());
 
                 joint = gameObject.AddComponent<DistanceJoint2D>();
@@ -137,8 +138,8 @@ public class PlayerInput : MonoBehaviour
 
                 left = true;
                 targetVelocity = rb.linearVelocity.magnitude;
-                handManager.moveHand(true, lHand.pos, false);
-                handManager.moveHand(false, rDefault, true);
+                handManager.moveLeft(lHand.pos);
+
                 Destroy(gameObject.GetComponent<DistanceJoint2D>());
 
                 joint = gameObject.AddComponent<DistanceJoint2D>();
@@ -157,6 +158,8 @@ public class PlayerInput : MonoBehaviour
                 currentHand = lHand;
             }
         }
+
+
         if (Input.GetKeyUp(KeyCode.Space) && holding && !locked)
         {
             PLayRelease();
@@ -164,8 +167,9 @@ public class PlayerInput : MonoBehaviour
             Destroy(gameObject.GetComponent<DistanceJoint2D>());
             holding = false;
             rb.linearVelocity = rb.linearVelocity.normalized * rb.linearVelocity.magnitude * 8f * currentHand.holdScript.getMult();
-            handManager.moveHand(true, lDefault, true);
-            handManager.moveHand(false, rDefault, true);
+
+            handManager.detactRight();
+            handManager.detachLeft();
 
             currentHand = null;
         }
@@ -174,6 +178,9 @@ public class PlayerInput : MonoBehaviour
             locked = false;
             holding = false;
             PlayPull();
+
+            handManager.detactRight();
+            handManager.detachLeft();
 
             Destroy(gameObject.GetComponent<DistanceJoint2D>());
             rb.AddForceY(forceStrength, ForceMode2D.Impulse);
