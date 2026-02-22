@@ -3166,6 +3166,7 @@ GameObject:
   - component: {fileID: 519420029}
   - component: {fileID: 519420030}
   - component: {fileID: 519420033}
+  - component: {fileID: 519420034}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -5938,7 +5939,8 @@ Transform:
   m_LocalPosition: {x: 3.88, y: 200.9, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1298610719}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &932599918
@@ -6495,6 +6497,78 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2230275134318841135, guid: b687e1f9ae81a4dde8674222ef2898b4, type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2699928847575138010, guid: b687e1f9ae81a4dde8674222ef2898b4, type: 3}
+      propertyPath: m_RenderMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2699928847575138010, guid: b687e1f9ae81a4dde8674222ef2898b4, type: 3}
+      propertyPath: m_SortingOrder
+      value: 32
+      objectReference: {fileID: 0}
+    - target: {fileID: 3236572270807957124, guid: b687e1f9ae81a4dde8674222ef2898b4, type: 3}
+      propertyPath: m_Pivot.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3236572270807957124, guid: b687e1f9ae81a4dde8674222ef2898b4, type: 3}
+      propertyPath: m_Pivot.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3236572270807957124, guid: b687e1f9ae81a4dde8674222ef2898b4, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3236572270807957124, guid: b687e1f9ae81a4dde8674222ef2898b4, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3236572270807957124, guid: b687e1f9ae81a4dde8674222ef2898b4, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3236572270807957124, guid: b687e1f9ae81a4dde8674222ef2898b4, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3236572270807957124, guid: b687e1f9ae81a4dde8674222ef2898b4, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3236572270807957124, guid: b687e1f9ae81a4dde8674222ef2898b4, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3236572270807957124, guid: b687e1f9ae81a4dde8674222ef2898b4, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3236572270807957124, guid: b687e1f9ae81a4dde8674222ef2898b4, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3236572270807957124, guid: b687e1f9ae81a4dde8674222ef2898b4, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3236572270807957124, guid: b687e1f9ae81a4dde8674222ef2898b4, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3899129955605075020, guid: b687e1f9ae81a4dde8674222ef2898b4, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3899129955605075020, guid: b687e1f9ae81a4dde8674222ef2898b4, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -2160
+      objectReference: {fileID: 0}
+    - target: {fileID: 5796179969039354540, guid: b687e1f9ae81a4dde8674222ef2898b4, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 6df7ff3caa54d433ca28a6a404c9738e, type: 2}
     - target: {fileID: 7170913585327594304, guid: b687e1f9ae81a4dde8674222ef2898b4, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -14892,5 +14966,5 @@ SceneRoots:
   - {fileID: 2039276540}
   - {fileID: 402975245}
   - {fileID: 524718674}
-  - {fileID: 885615404}
   - {fileID: 930431317}
+  - {fileID: 1008731028}
