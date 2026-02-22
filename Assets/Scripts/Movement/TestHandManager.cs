@@ -9,7 +9,7 @@ public class TestHandManager : MonoBehaviour
     void Start()
     {
         handManager = GameObject.FindGameObjectWithTag("HandManager");
-        handManager.GetComponent<HandMovementHandler>().moveHand(true, target, true);
+        // handManager.GetComponent<HandMovementHandler>().moveHand(true, target, true);
     }
 
     // Update is called once per frame

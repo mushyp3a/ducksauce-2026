@@ -43,11 +43,11 @@ public class DetectNextHold : MonoBehaviour
         {
             if (rightRankings.Length > 0)
             {
-            handler.moveHand(false, rightRankings.Last().transform, true);
+                handler.rightDefault(rightRankings.Last().transform);
                 
             } else
             {
-                handler.moveHand(false, rDefault, true);
+                handler.rightDefault(rDefault);
             }
         }
 
@@ -57,10 +57,10 @@ public class DetectNextHold : MonoBehaviour
             if (leftRankings.Length > 0)
             {
                 leftChoose = leftRankings.Last().transform;
-                handler.moveHand(true, leftRankings.Last().transform, true);
+                handler.leftDefault(leftRankings.Last().transform);
             } else
             {
-                handler.moveHand(true, lDefault, true);
+                handler.leftDefault(lDefault);
             }
         } 
     }
