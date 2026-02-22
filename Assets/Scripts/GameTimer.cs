@@ -4,6 +4,7 @@ using TMPro;
 public class GameTimer : MonoBehaviour
 {
     public TMP_Text timerText;
+    public TMP_Text timerTextWin;
     public bool runOnStart = true;
 
     float elapsed;
@@ -22,6 +23,7 @@ public class GameTimer : MonoBehaviour
         int secs = (int)(elapsed % 60);
         int ms   = (int)((elapsed * 100) % 100);
         timerText.text = string.Format("{0}:{1:00}.{2:00}", mins, secs, ms);
+        timerTextWin.text = string.Format("{0}:{1:00}.{2:00}", mins, secs, ms);
     }
 
     public void StartTimer() { running = true; }
